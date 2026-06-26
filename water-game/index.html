@@ -4,10 +4,92 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>water sort puzzle</title>
+
+    <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></script>
+    <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></script>
+    <script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
+    <script>
+      window.ezstandalone = window.ezstandalone || {};
+      ezstandalone.cmd = ezstandalone.cmd || [];
+    </script>
+    <script src="//ezoicanalytics.com/analytics.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   </head>
   <body>
     <div id="root"></div>
+
+    <div style="padding: 20px;">
+      <h1>Game Shop</h1>
+      <button onclick="buyPackage('c1')">100 Coins (₹9)</button>
+      <button onclick="buyPackage('c2')">1000 Coins (₹29)</button>
+      <button onclick="buyPackage('c3')">10000 Coins (₹99)</button>
+      <button onclick="buyPackage('offer1')">3 Bottles Pack (₹10)</button>
+      <button onclick="buyPackage('ads1')">No Ads 2 Months (₹99)</button>
+    </div>
+
+    <script>
+        // Firebase Config (Apananka actual config eithi paste karantu)
+        const firebaseConfig = { /* ... */ };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Packages details
+        const packages = {
+            "c1": { name: "100 Coins", amount: 900 },
+            "c2": { name: "1000 Coins", amount: 2900 },
+            "c3": { name: "10000 Coins", amount: 9900 },
+            "c4": { name: "100000 Coins", amount: 14900 },
+            "c5": { name: "10M Coins", amount: 99900 },
+            "ads1": { name: "No Ads 2 Months", amount: 9900 },
+            "ads2": { name: "No Ads 4 Months", amount: 14900 },
+            "ads3": { name: "No Ads 6 Months", amount: 19900 },
+            "ads4": { name: "No Ads 1 Year", amount: 24900 },
+            "ads5": { name: "Lifetime No Ads", amount: 299900 },
+            "offer1": { name: "3 Bottles Special", amount: 1000 }
+        };
+
+        function buyPackage(pkgId) {
+            const pkg = packages[pkgId];
+            var options = {
+                "key": "rzp_test_YOUR_KEY_ID", 
+                "amount": pkg.amount,
+                "currency": "INR",
+                "name": "Water Sort Shop",
+                "description": pkg.name,
+                "handler": function (response){
+                    updateUserDatabase(pkgId);
+                }
+            };
+            var rzp = new Razorpay(options);
+            rzp.open();
+        }
+
+        function updateUserDatabase(pkgId) {
+            const user = firebase.auth().currentUser;
+            if(!user) { alert("Please Login!"); return; }
+
+            if(pkgId.startsWith('c')) {
+                const coinValues = {'c1':100, 'c2':1000, 'c3':10000, 'c4':100000, 'c5':10000000};
+                db.collection("users").doc(user.uid).update({
+                    coins: firebase.firestore.FieldValue.increment(coinValues[pkgId])
+                });
+            } 
+            else if(pkgId === 'offer1') {
+                db.collection("users").doc(user.uid).update({
+                    bottles: firebase.firestore.FieldValue.increment(3)
+                });
+            }
+            else if(pkgId.startsWith('ads')) {
+                alert("Ads removed for selected duration!");
+            }
+            alert("Purchase Successful!");
+        }
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
