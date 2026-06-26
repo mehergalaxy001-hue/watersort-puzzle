@@ -4454,99 +4454,66 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* 💳 SIMULATED GOOGLE PLAY STORE CHECKOUT MODAL (Fake Payment Refusal) */}
-      <AnimatePresence>
-        {checkoutItem && (
-          <div className="fixed inset-0 bg-black/75 backdrop-blur-md z-[999999] flex items-center justify-center p-4 select-none animate-fadeIn">
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 15 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-slate-900 border-2 border-slate-700 text-white rounded-3xl w-full max-w-sm overflow-hidden flex flex-col shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative font-sans text-left"
-            >
-              {/* Header */}
-              <div className="bg-gradient-to-r from-slate-800 to-slate-850 px-5 py-4 border-b border-slate-700/80 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">🛡️</span>
-                  <div>
-                    <h3 className="text-xs font-black tracking-wider uppercase text-slate-200">Google Play Simulated Checkout</h3>
-                    <p className="text-[9px] text-slate-400 font-mono">Sandboxed Payment Gateway</p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => { audio.playClick(); setCheckoutItem(null); setCheckoutError(null); }}
-                  className="w-7 h-7 rounded-full bg-slate-700/60 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs font-bold transition cursor-pointer"
-                >
-                  ✕
-                </button>
-              </div>
-
-              {/* Body */}
-              <div className="p-5 space-y-4">
-                {/* Item Summary */}
-                <div className="bg-slate-800/80 rounded-2xl p-4 border border-slate-700/60 flex items-center gap-3.5 shadow-inner">
-                  <span className="text-3xl filter drop-shadow">{checkoutItem.icon}</span>
-                  <div className="flex-1">
-                    <h4 className="text-xs font-black text-white uppercase tracking-wide">{checkoutItem.title}</h4>
-                    <p className="text-[9.5px] text-slate-300 leading-normal mt-0.5">{checkoutItem.desc}</p>
-                    <div className="mt-1.5 inline-block bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-mono font-bold text-[9.5px] px-2 py-0.5 rounded-lg">
-                      {checkoutItem.price}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Account details */}
-                <div className="space-y-2 bg-slate-850/50 rounded-xl p-3 border border-slate-800 text-[10px]">
-                  <div className="flex justify-between text-slate-400 font-mono">
-                    <span>Account:</span>
-                    <span className="text-slate-200">mehergalaxy001@gmail.com</span>
-                  </div>
-                  <div className="flex justify-between text-slate-400 font-mono">
-                    <span>Payment Method:</span>
-                    <span className="text-sky-400 font-bold flex items-center gap-1">📱 Google Pay Balance</span>
-                  </div>
-                  <div className="flex justify-between text-slate-400 font-mono">
-                    <span>Demo Sandboxing:</span>
-                    <span className="text-amber-400 font-bold">Preview Environment</span>
-                  </div>
-                </div>
-
-                {/* Error / Refusal Message when BUY clicked */}
-                {checkoutError && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="bg-rose-500/20 border-2 border-rose-500/60 rounded-2xl p-3 text-center text-rose-200 text-[10.5px] font-bold leading-relaxed whitespace-pre-line shadow-lg font-mono"
-                  >
-                    {checkoutError}
-                  </motion.div>
-                )}
-              </div>
-
-              {/* Footer Buttons */}
-              <div className="p-4 pt-0 flex gap-2.5">
-                <button
-                  onClick={() => { audio.playClick(); setCheckoutItem(null); setCheckoutError(null); }}
-                  className="flex-1 py-3 bg-slate-800 hover:bg-slate-750 text-slate-300 font-bold rounded-2xl text-[10px] uppercase tracking-wider transition border border-slate-700 active:scale-95 cursor-pointer"
-                >
-                  CANCEL
-                </button>
-                <button
-                  onClick={() => {
-                    audio.playClick();
-                    setCheckoutError("❌ PURCHASE REFUSED (DEMO MODE):\n\nReal money transactions (Coins & No Ads packages) cannot be purchased in this preview version.");
-                  }}
-                  className="flex-[1.5] py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-black rounded-2xl text-[11px] uppercase tracking-wider transition shadow-lg shadow-emerald-900/40 active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
-                >
-                  <span>🔒</span>
-                  <span>1-TAP BUY</span>
-                </button>
-              </div>
-            </motion.div>
+     {/* 💳 REAL CHECKOUT MODAL */}
+<AnimatePresence>
+  {checkoutItem && (
+    <div className="fixed inset-0 bg-black/75 backdrop-blur-md z-[999999] flex items-center justify-center p-4 select-none animate-fadeIn">
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0, y: 15 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="bg-slate-900 border-2 border-slate-700 text-white rounded-3xl w-full max-w-sm overflow-hidden flex flex-col shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative font-sans text-left"
+      >
+        <div className="bg-gradient-to-r from-slate-800 to-slate-850 px-5 py-4 border-b border-slate-700/80 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-lg">🛡️</span>
+            <div>
+              <h3 className="text-xs font-black tracking-wider uppercase text-slate-200">Checkout</h3>
+              <p className="text-[9px] text-slate-400 font-mono">Secure Payment</p>
+            </div>
           </div>
-        )}
-      </AnimatePresence>
+          <button
+            onClick={() => { audio.playClick(); setCheckoutItem(null); }}
+            className="w-7 h-7 rounded-full bg-slate-700/60 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs font-bold transition cursor-pointer"
+          >
+            ✕
+          </button>
+        </div>
 
+        <div className="p-5 space-y-4">
+          <div className="bg-slate-800/80 rounded-2xl p-4 border border-slate-700/60 flex items-center gap-3.5 shadow-inner">
+            <span className="text-3xl filter drop-shadow">{checkoutItem.icon}</span>
+            <div className="flex-1">
+              <h4 className="text-xs font-black text-white uppercase tracking-wide">{checkoutItem.title}</h4>
+              <p className="text-[9.5px] text-slate-300 leading-normal mt-0.5">{checkoutItem.desc}</p>
+              <div className="mt-1.5 inline-block bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-mono font-bold text-[9.5px] px-2 py-0.5 rounded-lg">
+                {checkoutItem.price}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="p-4 pt-0 flex gap-2.5">
+          <button
+            onClick={() => { audio.playClick(); setCheckoutItem(null); }}
+            className="flex-1 py-3 bg-slate-800 hover:bg-slate-750 text-slate-300 font-bold rounded-2xl text-[10px] uppercase tracking-wider transition border border-slate-700 active:scale-95 cursor-pointer"
+          >
+            CANCEL
+          </button>
+          <button
+            onClick={() => {
+              audio.playClick();
+              // EITHI REAL PAYMENT TRIGGER HEBA
+              (window as any).buyPackage(checkoutItem.id); 
+              setCheckoutItem(null);
+            }}
+            className="flex-[1.5] py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-black rounded-2xl text-[11px] uppercase tracking-wider transition shadow-lg shadow-emerald-900/40 active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
+          >
+            <span>🔒</span>
+            <span>PAY NOW</span>
+          </button>
+        </div>
+      </motion.div>
     </div>
-  );
-}
+  )}
+</AnimatePresence>
