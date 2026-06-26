@@ -1,0 +1,6 @@
+{
+  "name": "Water Sort Puzzle",
+  "description": "A beautifully polished 2D fluid-sorting puzzle game with realistic physics simulation, wavy liquids, procedural sound effects, level generation, and undo capabilities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
