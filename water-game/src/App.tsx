@@ -2327,7 +2327,7 @@ export default function App() {
                           { duration: "2 Month No Ads", price: "₹99 / $1.19 USD", text: "Plus Plan", icon: "🚫", desc: "Enjoy completely ad-free gaming for 2 continuous months." },
                           { duration: "4 Month No Ads", price: "₹149", text: "Standard Plan", icon: "🚫", desc: "Solid 4 months of ads-free fluid sorting convenience." },
                           { duration: "6 Month No Ads", price: "₹199 / $2.39 USD", text: "Pro Plan", icon: "🚫", desc: "Epic 6 months of absolute sorting comfort with zero ads." },
-                          { duration: "1 Year No Ads", price: "₹249 / $2.99 USD", text: "Elite Plan", icon: "🛡️", desc: "Unleash maximum focus with 1 full year ad-free premium access." },
+                          { duration: "1 Year No Ads", price: "₹249 / $2.99 USD", text: "Elite Plan", icon: "🛡️", desc: "Unleash maximum focus with 1 full year ad-free premium access." }, isRecommended: true },
                           { duration: "Lifetime No Ads", price: "₹2999 / $35.99 USD", text: "Ultimate Pass", icon: "👑", desc: "Remove all advertisements forever from your account." }
                         ].map((pkg, idx) => (
                           <div
@@ -3773,13 +3773,7 @@ export default function App() {
         <AdMobBannerAd />
       </div>
 
-      {/* Footer is snug with no extra scrolling */}
-      <footer className="w-full text-center py-2 relative z-10 text-[9px] text-slate-600 font-mono select-none flex-none bg-black/10">
-        <div className="max-w-xl mx-auto px-4 flex items-center justify-between">
-          <span>GALAXY STUDIO PREMIUM APP</span>
-          <span>© {new Date().getFullYear()} ALL RIGHTS RESERVED</span>
-        </div>
-      </footer>
+
 
       {/* About Us and Codex Modal Overlay */}
       <PrivacyAboutModal 
