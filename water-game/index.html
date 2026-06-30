@@ -91,5 +91,20 @@ firebase.auth().signInAnonymously().catch((error) => {
 
 <script type="module" src="/src/main.tsx"></script>
 
+<script>
+function requestRewardAd() {
+    if (typeof Android !== 'undefined') {
+        Android.showRewarded();
+    } else {
+        console.log("App interface not found.");
+    }
+}
+
+function claimCoins() {
+    console.log("Ad complete! Adding coins 50 ");
+    alert("Reward received!"); 
+}
+</script>
+
 </body>
 </html>
